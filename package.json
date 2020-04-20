@@ -5,12 +5,14 @@
   "author": "Jamil Falconi",
   "private": true,
   "scripts": {
+    "clean": "rimraf .nuxt dist-api *.tsbuildinfo .eslintcache",
     "dev": "cross-env NODE_ENV=development nodemon --inspect server/index.ts --watch server",
-    "build": "nuxt build && tsc server/api",
+    "build": "nuxt build",
     "start": "cross-env NODE_ENV=production ts-node server/index.ts",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "tsc -p tsconfig.api.json"
   },
   "dependencies": {
     "@loopback/boot": "^2.0.4",

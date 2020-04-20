@@ -1,13 +1,8 @@
-// Copyright IBM Corp. 2019,2020. All Rights Reserved.
-// Node module: @loopback/example-express-composition
-// This file is licensed under the MIT License.
-// License text available at https://opensource.org/licenses/MIT
-
 import { ApplicationConfig } from '@loopback/core';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import http from 'http';
 import pEvent from 'p-event';
-import { LoopbackApplication } from './api';
+import { LoopbackApplication } from '../dist-api';
 const { Nuxt, Builder } = require('nuxt');
 
 export class ExpressServer {
@@ -18,7 +13,7 @@ export class ExpressServer {
     constructor(private options: ApplicationConfig = {}) {
         this.app = express();
         this.lbApp = new LoopbackApplication(options);
-
+        this.app.use('/api', this.lbApp.requestHandler);
     }
 
     public async nuxtSetup() {
@@ -30,11 +25,10 @@ export class ExpressServer {
             await builder.build()
         }
         this.app.use(nuxt.render);
-    // Expose the front-end assets via Express, not as LB4 route
-    this.app.use('/api', this.lbApp.requestHandler);
+
     }
     public async boot() {
-        //await this.nuxtSetup();
+        await this.nuxtSetup();
         await this.lbApp.boot();
   
     }
