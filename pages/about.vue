@@ -5,7 +5,7 @@
       <HelloWorld />
 
       <h1 class="title">
-        nuxt-ts-express
+        About US
       </h1>
       <h2 class="subtitle">
         My incredible Nuxt.js project

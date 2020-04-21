@@ -5,7 +5,7 @@
       <HelloWorld />
 
       <h1 class="title">
-        nuxt-ts-express
+        Admin
       </h1>
       <h2 class="subtitle">
         My incredible Nuxt.js project
